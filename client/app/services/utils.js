@@ -14,9 +14,9 @@ export function filterRecent(data, recentStorage) {
   const sortedUserRecentItems = userRecentItems.sort((itemA, itemB) => {
     const indexOfAInRecentItems = parsedRecentItems.indexOf(itemA.id);
     const indexOfBInRecentItems = parsedRecentItems.indexOf(itemB.id);
-    if(indexOfAInRecentItems > indexOfBInRecentItems) return 1;
-    if(indexOfAInRecentItems < indexOfBInRecentItems) return -1;
+    if (indexOfAInRecentItems > indexOfBInRecentItems) return 1;
+    if (indexOfAInRecentItems < indexOfBInRecentItems) return -1;
     return 0;
-  })
+  });
   return { ...data, results: sortedUserRecentItems };
-};
+}
