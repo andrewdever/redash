@@ -5,6 +5,9 @@ import PageHeader from "@/components/PageHeader";
 import Paginator from "@/components/Paginator";
 import { DashboardTagsControl } from "@/components/tags-control/TagsControl";
 
+import Button from "antd/lib/button";
+import { policy } from "@/services/policy";
+
 import { wrap as itemsList, ControllerType } from "@/components/items-list/ItemsList";
 import { ResourceItemsSource } from "@/components/items-list/classes/ItemsSource";
 import { UrlStateStorage } from "@/components/items-list/classes/StateStorage";
@@ -21,6 +24,7 @@ import DashboardListEmptyState from "./components/DashboardListEmptyState";
 import "./dashboard-list.css";
 
 class DashboardList extends React.Component {
+
   static propTypes = {
     controller: ControllerType.isRequired,
   };
@@ -76,6 +80,11 @@ class DashboardList extends React.Component {
       <div className="page-dashboard-list">
         <div className="container">
           <PageHeader title={controller.params.pageTitle} />
+          <div className="m-l-15 m-r-15">
+          <div className="m-b-15">
+          
+        </div>
+        </div>
           <Layout className="m-l-15 m-r-15">
             <Layout.Sidebar className="m-b-0">
               <Sidebar.SearchInput

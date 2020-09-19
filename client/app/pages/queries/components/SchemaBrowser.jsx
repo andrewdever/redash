@@ -140,6 +140,7 @@ export default function SchemaBrowser({ schema, onRefresh, onItemSelect, ...prop
 
   return (
     <div className="schema-container" {...props}>
+    {/*
       <div className="schema-control">
         <Input
           className="m-r-5"
@@ -154,6 +155,7 @@ export default function SchemaBrowser({ schema, onRefresh, onItemSelect, ...prop
           </Button>
         </Tooltip>
       </div>
+    */}
       <div className="schema-browser">
         <AutoSizer>
           {({ width, height }) => (

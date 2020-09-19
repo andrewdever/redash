@@ -7,7 +7,7 @@ import Icon from "antd/lib/icon";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import EmptyState from "@/components/empty-state/EmptyState";
 import DynamicComponent from "@/components/DynamicComponent";
-import BeaconConsent from "@/components/BeaconConsent";
+// import BeaconConsent from "@/components/BeaconConsent";
 import recordEvent from "@/services/recordEvent";
 import { messages } from "@/services/auth";
 import notification from "@/services/notification";
@@ -169,7 +169,7 @@ function Home() {
         />
         <DynamicComponent name="HomeExtra" />
         <DashboardAndQueryFavoritesList />
-        <BeaconConsent />
+
       </div>
     </div>
   );

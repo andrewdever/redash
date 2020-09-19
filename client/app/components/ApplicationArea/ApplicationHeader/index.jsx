@@ -19,7 +19,7 @@ import { Query } from "@/services/query";
 import frontendVersion from "@/version.json";
 import logoUrl from "@/assets/images/redash_icon_small.png";
 
-import FavoritesDropdown from "./FavoritesDropdown";
+// import FavoritesDropdown from "./FavoritesDropdown";
 import "./index.less";
 
 function onSearch(q) {
@@ -34,69 +34,81 @@ function DesktopNavbar() {
   return (
     <div className="app-header" data-platform="desktop">
       <div>
+        {currentUser.canCreate() && (
+                  <Dropdown
+                    trigger={["click"]}
+                    overlay={
+                      <Menu>
+                        {currentUser.hasPermission("create_dashboard") && (
+                          <Menu.Item key="new-dashboard">
+                            <a onMouseUp={showCreateDashboardDialog}>Dashboard</a>
+                          </Menu.Item>
+                        )}
+                        {currentUser.hasPermission("create_query") && (
+                          <Menu.Item key="new-query">
+                            <a href="queries/new">Query</a>
+                          </Menu.Item>
+                        )}
+                        {currentUser.hasPermission("create_query") && (
+                            <Menu.Item key="snippets">
+                              <a href="query_snippets/new">Snippet</a>
+                            </Menu.Item>
+                        )}
+                        {currentUser.hasPermission("list_alerts") && (
+                          <Menu.Item key="new-alert">
+                            <a href="alerts/new">Alert</a>
+                          </Menu.Item>
+                        )}
+                      </Menu>
+                    }>
+                    <Button type="primary" data-test="CreateButton">
+                      Create <Icon type="down" />
+                    </Button>
+                  </Dropdown>
+                )}
+
         <Menu mode="horizontal" selectable={false}>
           {currentUser.hasPermission("list_dashboards") && (
-            <Menu.Item key="dashboards" className="dropdown-menu-item">
+            <Menu.Item key="dashboards">
               <Button href="dashboards">Dashboards</Button>
-              <FavoritesDropdown fetch={Dashboard.favorites} urlTemplate="dashboard/${slug}" />
             </Menu.Item>
           )}
           {currentUser.hasPermission("view_query") && (
-            <Menu.Item key="queries" className="dropdown-menu-item">
+            <Menu.Item key="queries">
               <Button href="queries">Queries</Button>
-              <FavoritesDropdown fetch={Query.favorites} urlTemplate="queries/${id}" />
             </Menu.Item>
           )}
+          {/*
+          {currentUser.hasPermission("create_query") && (
+            <Menu.Item key="snippets">
+              <Button href="query_snippets">Snippets</Button>
+            </Menu.Item>
+          )}
+          */}
+          {/*
           {currentUser.hasPermission("list_alerts") && (
             <Menu.Item key="alerts">
               <Button href="alerts">Alerts</Button>
             </Menu.Item>
-          )}
+          )}  
+          */}        
         </Menu>
-        {currentUser.canCreate() && (
-          <Dropdown
-            trigger={["click"]}
-            overlay={
-              <Menu>
-                {currentUser.hasPermission("create_query") && (
-                  <Menu.Item key="new-query">
-                    <a href="queries/new">New Query</a>
-                  </Menu.Item>
-                )}
-                {currentUser.hasPermission("create_dashboard") && (
-                  <Menu.Item key="new-dashboard">
-                    <a onMouseUp={showCreateDashboardDialog}>New Dashboard</a>
-                  </Menu.Item>
-                )}
-                {currentUser.hasPermission("list_alerts") && (
-                  <Menu.Item key="new-alert">
-                    <a href="alerts/new">New Alert</a>
-                  </Menu.Item>
-                )}
-              </Menu>
-            }>
-            <Button type="primary" data-test="CreateButton">
-              Create <Icon type="down" />
-            </Button>
-          </Dropdown>
-        )}
+      
       </div>
       <div className="header-logo">
         <a href="./">
-          <img src={logoUrl} alt="Redash" />
+          Yolk.
         </a>
       </div>
       <div>
-        <Input.Search
-          className="searchbar"
-          placeholder="Search queries..."
-          data-test="AppHeaderSearch"
-          onSearch={onSearch}
-        />
+        
         <Menu mode="horizontal" selectable={false}>
+          {/*
           <Menu.Item key="help">
             <HelpTrigger type="HOME" className="menu-item-button" />
           </Menu.Item>
+          */}
+          {/*
           {currentUser.isAdmin && (
             <Menu.Item key="settings">
               <Tooltip title="Settings">
@@ -106,6 +118,7 @@ function DesktopNavbar() {
               </Tooltip>
             </Menu.Item>
           )}
+          */}
           <Menu.Item key="profile">
             <Dropdown
               overlayStyle={{ minWidth: 200 }}
@@ -113,9 +126,28 @@ function DesktopNavbar() {
               trigger={["click"]}
               overlay={
                 <Menu>
-                  <Menu.Item key="profile">
-                    <a href="users/me">Edit Profile</a>
+                  <Menu.Item key="alerts">
+                    <a href="alerts">Alerts</a>
                   </Menu.Item>
+                  <Menu.Item key="snippets">
+                    <a href="query_snippets">Snippets</a>
+                  </Menu.Item>
+                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
+                  <Menu.Item key="invite">
+                    <a href="users/new">Invite Users</a>
+                  </Menu.Item>
+                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
+                  <Menu.Item key="profile">
+                    <a href="users/me">Settings</a>
+                  </Menu.Item>
+                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
+                  <Menu.Item key="docs">
+                    <a href="yolk.com/docs">Docs</a>
+                  </Menu.Item>
+                  <Menu.Item key="help">
+                    Support <HelpTrigger type="HOME" className="menu-item-button" />
+                  </Menu.Item>  
+                {/*
                   {currentUser.hasPermission("super_admin") && <Menu.Divider />}
                   {currentUser.isAdmin && (
                     <Menu.Item key="datasources">
@@ -131,7 +163,7 @@ function DesktopNavbar() {
                     <Menu.Item key="users">
                       <a href="users">Users</a>
                     </Menu.Item>
-                  )}
+                  )} 
                   {currentUser.hasPermission("create_query") && (
                     <Menu.Item key="snippets">
                       <a href="query_snippets">Query Snippets</a>
@@ -142,6 +174,7 @@ function DesktopNavbar() {
                       <a href="destinations">Alert Destinations</a>
                     </Menu.Item>
                   )}
+                  */}
                   {currentUser.hasPermission("super_admin") && <Menu.Divider />}
                   {currentUser.hasPermission("super_admin") && (
                     <Menu.Item key="status">

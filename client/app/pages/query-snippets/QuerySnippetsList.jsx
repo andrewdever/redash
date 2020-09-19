@@ -1,6 +1,7 @@
 import { get } from "lodash";
 import React from "react";
 
+import PageHeader from "@/components/PageHeader";
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -14,12 +15,12 @@ import { StateStorage } from "@/components/items-list/classes/StateStorage";
 
 import LoadingState from "@/components/items-list/components/LoadingState";
 import ItemsTable, { Columns } from "@/components/items-list/components/ItemsTable";
-import wrapSettingsTab from "@/components/SettingsWrapper";
 
 import QuerySnippet from "@/services/query-snippet";
 import { currentUser } from "@/services/auth";
 import { policy } from "@/services/policy";
 import notification from "@/services/notification";
+
 import "./QuerySnippetsList.less";
 
 const canEditQuerySnippet = querySnippet => currentUser.isAdmin || currentUser.id === get(querySnippet, "user.id");
@@ -139,54 +140,78 @@ class QuerySnippetsList extends React.Component {
     const { controller } = this.props;
 
     return (
-      <div>
-        <div className="m-b-15">
-          <Button
-            type="primary"
-            onClick={() => this.showSnippetDialog()}
-            disabled={!policy.isCreateQuerySnippetEnabled()}>
-            <i className="fa fa-plus m-r-5" />
-            New Query Snippet
-          </Button>
-        </div>
+      <div className="query-snippets-list">
+      <div className="container">
+      <PageHeader title={controller.params.pageTitle} />
 
         {!controller.isLoaded && <LoadingState className="" />}
         {controller.isLoaded && controller.isEmpty && (
-          <div className="text-center">
-            There are no query snippets yet.
+        <div className="empty-state bg-white tiled">
+          <div className="empty-state__steps">
+            <h4>Let&apos;s get started</h4>
             {policy.isCreateQuerySnippetEnabled() && (
-              <div className="m-t-5">
+              <ol>
+              <li>
                 <a className="clickable" onClick={() => this.showSnippetDialog()}>
-                  Click here
-                </a>{" "}
-                to add one.
-              </div>
+                  Create
+                </a>{" "} your first query snippet.
+              </li>
+            </ol>
             )}
+            <p>
+          Need more support?{" "}
+          <a href='yolk.com/docs' target="_blank" rel="noopener noreferrer">
+            See our Help
+            <i className="fa fa-external-link m-l-5" aria-hidden="true" />
+          </a>
+        </p>
           </div>
+        </div>
         )}
         {controller.isLoaded && !controller.isEmpty && (
-          <div className="table-responsive">
-            <ItemsTable
-              items={controller.pageItems}
-              columns={this.listColumns}
-              context={this.actions}
-              orderByField={controller.orderByField}
-              orderByReverse={controller.orderByReverse}
-              toggleSorting={controller.toggleSorting}
-            />
-            <Paginator
-              totalCount={controller.totalItemsCount}
-              itemsPerPage={controller.itemsPerPage}
-              page={controller.page}
-              onChange={page => controller.updatePagination({ page })}
-            />
+          <div className="container">
+            <div className="table-responsive">
+              <ItemsTable
+                items={controller.pageItems}
+                columns={this.listColumns}
+                context={this.actions}
+                orderByField={controller.orderByField}
+                orderByReverse={controller.orderByReverse}
+                toggleSorting={controller.toggleSorting}
+              />
+              <Paginator
+                totalCount={controller.totalItemsCount}
+                itemsPerPage={controller.itemsPerPage}
+                page={controller.page}
+                onChange={page => controller.updatePagination({ page })}
+              />
+            </div>
           </div>
         )}
+      </div>
       </div>
     );
   }
 }
 
+
+const QuerySnippetsListPage = itemsList(
+  QuerySnippetsList,
+    () =>
+      new ResourceItemsSource({
+        isPlainList: true,
+        getRequest() {
+          return {};
+        },
+        getResource() {
+          return QuerySnippet.query.bind(QuerySnippet);
+        },
+      }),
+    () => new StateStorage({ orderByField: "trigger", itemsPerPage: 10 })
+);
+
+
+{/* 
 const QuerySnippetsListPage = wrapSettingsTab(
   {
     permission: "create_query",
@@ -209,6 +234,7 @@ const QuerySnippetsListPage = wrapSettingsTab(
     () => new StateStorage({ orderByField: "trigger", itemsPerPage: 10 })
   )
 );
+*/}
 
 export default [
   routeWithUserSession({
@@ -220,5 +246,6 @@ export default [
     path: "/query_snippets/:querySnippetId(new|[0-9]+)",
     title: "Query Snippets",
     render: pageProps => <QuerySnippetsListPage {...pageProps} currentPage="query_snippets" isNewOrEditPage />,
+
   }),
 ];

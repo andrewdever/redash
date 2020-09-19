@@ -168,6 +168,7 @@ class OrganizationSettings extends React.Component {
             ))}
           </Select>
         </Form.Item>
+      {/*
         <Form.Item label="Chart Visualization">
           <Checkbox
             name="hide_plotly_mode_bar"
@@ -200,21 +201,7 @@ class OrganizationSettings extends React.Component {
             Enable multi-byte (Chinese, Japanese, and Korean) search for query names and descriptions (slower)
           </Checkbox>
         </Form.Item>
-        <DynamicComponent name="BeaconConsentSetting">
-          <Form.Item
-            label={
-              <>
-                Anonymous Usage Data Sharing <HelpTrigger type="USAGE_DATA_SHARING" />
-              </>
-            }>
-            <Checkbox
-              name="beacon_consent"
-              checked={formValues.beacon_consent}
-              onChange={e => this.handleChange("beacon_consent", e.target.checked)}>
-              Help Redash improve by automatically sending anonymous usage data
-            </Checkbox>
-          </Form.Item>
-        </DynamicComponent>
+      */}
       </React.Fragment>
     );
   }

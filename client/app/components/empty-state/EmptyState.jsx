@@ -77,6 +77,7 @@ function EmptyState({
 
   return (
     <div className="empty-state bg-white tiled">
+    {/* 
       <div className="empty-state__summary">
         {header && <h4>{header}</h4>}
         <h2>
@@ -89,9 +90,11 @@ function EmptyState({
           width="75%"
         />
       </div>
+      */}
       <div className="empty-state__steps">
         <h4>Let&apos;s get started</h4>
         <ol>
+        {/* 
           {currentUser.isAdmin && (
             <Step
               show={isAvailable.dataSource}
@@ -108,6 +111,7 @@ function EmptyState({
               text="Ask an account admin to connect a data source"
             />
           )}
+        */}
           <Step
             show={isAvailable.query}
             completed={isCompleted.query}
@@ -139,7 +143,7 @@ function EmptyState({
         </ol>
         <p>
           Need more support?{" "}
-          <a href={helpLink} target="_blank" rel="noopener noreferrer">
+          <a href="yolk.com/docs" target="_blank" rel="noopener noreferrer">
             See our Help
             <i className="fa fa-external-link m-l-5" aria-hidden="true" />
           </a>
