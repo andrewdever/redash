@@ -78,6 +78,7 @@ strong {
   }
 }
 
+<<<<<<< HEAD
 .settings-screen,
 .home-page,
 .page-dashboard-list,
@@ -88,6 +89,51 @@ strong {
   .container {
     width: 100%;
     max-width: none;
+=======
+// Fixed width layout for specific pages
+@media (min-width: 768px) {
+  .settings-screen,
+  .home-page,
+  .page-dashboard-list,
+  .page-queries-list,
+  .page-alerts-list,
+  .query-snippets-list,
+  .alert-page,
+  .fixed-container {
+    .container {
+      width: 750px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .settings-screen,
+  .home-page,
+  .page-dashboard-list,
+  .page-queries-list,
+  .page-alerts-list,
+  .query-snippets-list,
+  .alert-page,
+  .fixed-container {
+    .container {
+      width: 970px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .settings-screen,
+  .home-page,
+  .page-dashboard-list,
+  .page-queries-list,
+  .page-alerts-list,
+  .query-snippets-list,
+  .alert-page,
+  .fixed-container {
+    .container {
+      width: 1170px;
+    }
+>>>>>>> 122be43fdc9e7f60b41aaa1eba54a53c8b28e63a
   }
 }
 

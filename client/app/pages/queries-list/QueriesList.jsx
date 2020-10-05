@@ -115,6 +115,7 @@ class QueriesList extends React.Component {
     return (
       <div className="page-queries-list">
         <div className="container">
+<<<<<<< HEAD
           <PageHeader
             title={controller.params.pageTitle}
             actions={
@@ -127,6 +128,11 @@ class QueriesList extends React.Component {
             }
           />
           <Layout>
+=======
+          <PageHeader title={controller.params.pageTitle} />
+
+          <Layout className="m-l-15 m-r-15">
+>>>>>>> 122be43fdc9e7f60b41aaa1eba54a53c8b28e63a
             <Layout.Sidebar className="m-b-0">
               <Sidebar.SearchInput
                 placeholder="Search Queries..."

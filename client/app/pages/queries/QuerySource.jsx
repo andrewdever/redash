@@ -194,6 +194,7 @@ function QuerySource(props) {
       <main className="query-fullscreen">
         <Resizable direction="horizontal" sizeAttribute="flex-basis" toggleShortcut="Alt+Shift+D, Alt+D">
           <nav>
+          {/*
             {dataSourcesLoaded && (
               <div className="editor__left__data-source">
                 <Select
@@ -219,6 +220,7 @@ function QuerySource(props) {
                 </Select>
               </div>
             )}
+          */}
             <div className="editor__left__schema">
               <SchemaBrowser
                 dataSource={dataSource}

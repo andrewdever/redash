@@ -167,6 +167,7 @@ function EmptyState({
 
   return (
     <div className="empty-state bg-white tiled">
+    {/* 
       <div className="empty-state__summary">
         {header && <h4>{header}</h4>}
         <h2>
@@ -175,12 +176,67 @@ function EmptyState({
         <p>{description}</p>
         <img src={imageSource} alt={illustration + " Illustration"} width="75%" />
       </div>
+      */}
       <div className="empty-state__steps">
         <h4>Let&apos;s get started</h4>
+<<<<<<< HEAD
         <ol>{stepsItems.map(item => item.node)}</ol>
         <p>
           Need more support?{" "}
           <Link href={helpLink} target="_blank" rel="noopener noreferrer">
+=======
+        <ol>
+        {/* 
+          {currentUser.isAdmin && (
+            <Step
+              show={isAvailable.dataSource}
+              completed={isCompleted.dataSource}
+              url="data_sources/new"
+              urlText="Connect"
+              text="a Data Source"
+            />
+          )}
+          {!currentUser.isAdmin && (
+            <Step
+              show={isAvailable.dataSource}
+              completed={isCompleted.dataSource}
+              text="Ask an account admin to connect a data source"
+            />
+          )}
+        */}
+          <Step
+            show={isAvailable.query}
+            completed={isCompleted.query}
+            url="queries/new"
+            urlText="Create"
+            text="your first Query"
+          />
+          <Step
+            show={isAvailable.alert}
+            completed={isCompleted.alert}
+            url="alerts/new"
+            urlText="Create"
+            text="your first Alert"
+          />
+          <Step
+            show={isAvailable.dashboard}
+            completed={isCompleted.dashboard}
+            onClick={showCreateDashboardDialog}
+            urlText="Create"
+            text="your first Dashboard"
+          />
+          <Step
+            show={isAvailable.inviteUsers}
+            completed={isCompleted.inviteUsers}
+            url="users/new"
+            urlText="Invite"
+            text="your team members"
+          />
+        </ol>
+        <p>
+          Need more support?{" "}
+          <a href="yolk.com/docs" target="_blank" rel="noopener noreferrer">
+>>>>>>> 122be43fdc9e7f60b41aaa1eba54a53c8b28e63a
             See our Help
             <i className="fa fa-external-link m-l-5" aria-hidden="true" />
           </Link>

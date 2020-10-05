@@ -220,6 +220,7 @@ export default function SchemaBrowser({
 
   return (
     <div className="schema-container" {...props}>
+    {/*
       <div className="schema-control">
         <Input
           className="m-r-5"
@@ -234,6 +235,7 @@ export default function SchemaBrowser({
           </Button>
         </Tooltip>
       </div>
+<<<<<<< HEAD:client/app/components/queries/SchemaBrowser.jsx
       <SchemaList
         loading={isLoading && schema.length === 0}
         schema={filteredSchema}
@@ -241,6 +243,39 @@ export default function SchemaBrowser({
         onTableExpand={toggleTable}
         onItemSelect={onItemSelect}
       />
+=======
+    */}
+      <div className="schema-browser">
+        <AutoSizer>
+          {({ width, height }) => (
+            <List
+              ref={setListRef}
+              width={width}
+              height={height}
+              rowCount={filteredSchema.length}
+              rowHeight={({ index }) => {
+                const item = filteredSchema[index];
+                const columnCount = expandedFlags[item.name] ? item.columns.length : 0;
+                return schemaTableHeight + schemaColumnHeight * columnCount;
+              }}
+              rowRenderer={({ key, index, style }) => {
+                const item = filteredSchema[index];
+                return (
+                  <SchemaItem
+                    key={key}
+                    style={style}
+                    item={item}
+                    expanded={expandedFlags[item.name]}
+                    onToggle={() => toggleTable(item.name)}
+                    onSelect={onItemSelect}
+                  />
+                );
+              }}
+            />
+          )}
+        </AutoSizer>
+      </div>
+>>>>>>> 122be43fdc9e7f60b41aaa1eba54a53c8b28e63a:client/app/pages/queries/components/SchemaBrowser.jsx
     </div>
   );
 }
